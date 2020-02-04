@@ -19,8 +19,9 @@ var html = `
   <meta name="robots" content="noindex">
   <meta name="googlebot" content="noindex">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
-  <title>${authConfig.siteName}</title>
-  <script src="//cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js,gh/donwa/goindex@${authConfig.version}/themes/${authConfig.theme}/app.js"></script>
+  <title>${authConfig.siteName}</title>  
+  <script src="//cdn.jsdelivr.net/combine/gh/jquery/jquery@3.2/dist/jquery.min.js,gh/a224515a/MyGoIndex/themes/${authConfig.theme}/app.js"></script>
+
 </head>
 <body>
 </body>
