@@ -35,13 +35,13 @@ function render(path){
 }
 
 
-// 渲染 title
+// Render title
 function title(path){
     path = decodeURI(path);
     $('title').html(document.siteName+' - '+path);
 }
 
-// 渲染導航欄
+// Render navigation bar
 function nav(path){
     var html = "";
     html += `<a href="/" class="mdui-typo-headline folder">${document.siteName}</a>`;
@@ -61,7 +61,7 @@ function nav(path){
     $('#nav').html(html);
 }
 
-// 渲染文件列表
+// Render file list
 function list(path){
 	var content = `
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>
@@ -147,7 +147,7 @@ function list_files(path,files){
                 });
             }
             var ext = p.split('.').pop();
-            if("|html|php|css|go|java|js|json|txt|sh|md|mp4|bmp|jpg|jpeg|png|gif|m4a|mp3|wav|ogg|webm|avi|".indexOf(`|${ext}|`) >= 0){
+            if("|html|php|css|go|java|js|json|txt|sh|md|mp4|bmp|jpg|jpeg|png|gif|m4a|mp3|wav|ogg|webm|avi|opus|".indexOf(`|${ext}|`) >= 0){
 	            p += "?a=view";
 	            c += " view";
             }

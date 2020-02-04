@@ -33,7 +33,7 @@ function render(path) {
 		file(path);
 	}
 }
-// Rendering title
+// Render title
 function title(path) {
 	path = decodeURI(path);
 	$('title').html(document.siteName + ' - ' + path);
@@ -80,12 +80,15 @@ function list(path) {
 	   <li class="mdui-list-item th"> 
 	    <div class="mdui-col-xs-12 mdui-col-sm-7">
 	     文件
+	<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-3 mdui-text-right">
 	     建立時間
+	<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-2 mdui-text-right">
 	     大小
+	<i class="mdui-icon material-icons icon-sort" data-sort="size" data-order="downward">expand_more</i>
 	    </div> 
 	    </li> 
 	  </ul> 
@@ -151,7 +154,7 @@ function list_files(path, files) {
 				});
 			}
 			var ext = p.split('.').pop();
-			if ("|html|php|css|go|java|js|json|txt|sh|md|mp4|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0) {
+			if("|html|php|css|go|java|js|json|txt|sh|md|mp4|bmp|jpg|jpeg|png|gif|m4a|mp3|wav|ogg|webm|avi|opus|".indexOf(`|${ext}|`) >= 0) {
 				p += "?a=view";
 				c += " view";
 			}
@@ -221,13 +224,13 @@ function file_code(path) {
 <pre id="editor" ></pre>
 </div>
 <div class="mdui-textfield">
-	<label class="mdui-textfield-label">Download Link</label>
+	<label class="mdui-textfield-label">下載網址</label>
 	<input class="mdui-textfield-input" type="text" value="${href}"/>
 </div>
 <a href="${href}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 
-<script src="https://cdn.bootcss.com/ace/1.2.9/ace.js"></script>
-<script src="https://cdn.bootcss.com/ace/1.2.9/ext-language_tools.js"></script>
+<script src="https://cdn.staticfile.org/ace/1.4.7/ace.js"></script>
+<script src="https://cdn.staticfile.org/ace/1.4.7/ext-language_tools.js"></script>
 	`;
 	$('#content').html(content);
 	$.get(path, function (data) {
