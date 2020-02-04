@@ -399,7 +399,7 @@ function markdown(el, data){
         $(el).show().html(html);
     }
 }
-document.write('<script src="//cdn.jsdelivr.net/gh/a224515a/MyGoIndex/themes/dark/cari.js"></script>');
+document.write('<script src="//cdn.jsdelivr.net/gh/a224515a/MyGoIndex/themes/material/cari.js"></script>');
 
 // 監聽回退事件
 window.onpopstate = function(){
