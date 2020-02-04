@@ -69,11 +69,11 @@ function list(path) {
 	  <ul class="mdui-list"> 
 	   <li class="mdui-list-item th"> 
 	    <div class="mdui-col-xs-12 mdui-col-sm-7">
-	     文件
+	     名稱
 	<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-3 mdui-text-right">
-	     建立時間
+	     修改時間
 	<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-2 mdui-text-right">
@@ -266,7 +266,7 @@ function file_video(path) {
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">Reference address</label>
+	  <label class="mdui-textfield-label">HTML 引用</label>
 	  <textarea class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
 	</div>
 </div>
@@ -383,7 +383,7 @@ String.prototype.trim = function (char) {
 // README.md HEAD.md stand by
 function markdown(el, data) {
 	if (window.md == undefined) {
-		//$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@9.1.0/dist/markdown-it.min.js',function(){
+		//$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js',function(){
 		window.md = window.markdownit();
 		markdown(el, data);
 		//});
