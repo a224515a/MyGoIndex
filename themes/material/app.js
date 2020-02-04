@@ -8,8 +8,9 @@ function init(){
     document.siteName = $('title').html();
     $('body').addClass("mdui-theme-primary-blue-grey mdui-theme-accent-blue");
     var html = `
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
 <header class="mdui-appbar mdui-color-theme"> 
-   <div id="nav" class="mdui-toolbar mdui-container"> 
+   <div id="nav" class="mdui-toolbar mdui-container">
    </div> 
 </header>
 <div id="content" class="mdui-container"> 
@@ -398,6 +399,7 @@ function markdown(el, data){
         $(el).show().html(html);
     }
 }
+document.write('<script src="//cdn.jsdelivr.net/gh/a224515a/MyGoIndex/themes/dark/cari.js"></script>');
 
 // 監聽回退事件
 window.onpopstate = function(){
