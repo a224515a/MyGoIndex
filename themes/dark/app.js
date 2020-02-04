@@ -358,11 +358,11 @@ function utc2beijing(utc_datetime) {
 // Bytes adaptive conversion to KB,MB,GB
 function formatFileSize(bytes) {
 	if (bytes >= 1000000000) {
-		bytes = (bytes / 1000000000).toFixed(2) + ' GB';
+		bytes = (bytes / 1073741824).toFixed(2) + ' GB';
 	} else if (bytes >= 1000000) {
-		bytes = (bytes / 1000000).toFixed(2) + ' MB';
+		bytes = (bytes / 1048576).toFixed(2) + ' MB';
 	} else if (bytes >= 1000) {
-		bytes = (bytes / 1000).toFixed(2) + ' KB';
+		bytes = (bytes / 1024).toFixed(2) + ' KB';
 	} else if (bytes > 1) {
 		bytes = bytes + ' bytes';
 	} else if (bytes == 1) {
