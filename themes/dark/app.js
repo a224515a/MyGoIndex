@@ -33,11 +33,13 @@ function render(path) {
 		file(path);
 	}
 }
+
 // Render title
 function title(path) {
 	path = decodeURI(path);
 	$('title').html(document.siteName + ' - ' + path);
 }
+
 // Render navigation bar
 function nav(path) {
 	var html = "";
@@ -55,21 +57,9 @@ function nav(path) {
 			html += `<i class="mdui-icon material-icons mdui-icon-dark folder" style="margin:0;">chevron_right</i><a class="folder" href="${p}">${n}</a>`;
 		}
 	}
-	/*
-	html += `<div class="mdui-toolbar-spacer"></div>
-    <a href="https://github.com/kulokenci/goindex-drive" target="_blank" class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-tooltip="{content: 'GoIndex on Github'}">
-      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 36 36" enable-background="new 0 0 36 36" xml:space="preserve" class="mdui-icon" style="width: 24px;height:24px;">
-        <path fill-rule="evenodd" clip-rule="evenodd" fill="#ffffff" d="M18,1.4C9,1.4,1.7,8.7,1.7,17.7c0,7.2,4.7,13.3,11.1,15.5
-	c0.8,0.1,1.1-0.4,1.1-0.8c0-0.4,0-1.4,0-2.8c-4.5,1-5.5-2.2-5.5-2.2c-0.7-1.9-1.8-2.4-1.8-2.4c-1.5-1,0.1-1,0.1-1
-	c1.6,0.1,2.5,1.7,2.5,1.7c1.5,2.5,3.8,1.8,4.7,1.4c0.1-1.1,0.6-1.8,1-2.2c-3.6-0.4-7.4-1.8-7.4-8.1c0-1.8,0.6-3.2,1.7-4.4
-	c-0.2-0.4-0.7-2.1,0.2-4.3c0,0,1.4-0.4,4.5,1.7c1.3-0.4,2.7-0.5,4.1-0.5c1.4,0,2.8,0.2,4.1,0.5c3.1-2.1,4.5-1.7,4.5-1.7
-	c0.9,2.2,0.3,3.9,0.2,4.3c1,1.1,1.7,2.6,1.7,4.4c0,6.3-3.8,7.6-7.4,8c0.6,0.5,1.1,1.5,1.1,3c0,2.2,0,3.9,0,4.5
-	c0,0.4,0.3,0.9,1.1,0.8c6.5-2.2,11.1-8.3,11.1-15.5C34.3,8.7,27,1.4,18,1.4z"></path>
-      </svg>
-    </a>`;
-	*/
 	$('#nav').html(html);
 }
+
 // Render file list
 function list(path) {
 	var content = `
@@ -100,6 +90,7 @@ function list(path) {
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
 	$('#content').html(content);
+	
 	var password = localStorage.getItem('password' + path);
 	$('#list').html(`<div class="mdui-progress"><div class="mdui-progress-indeterminate"></div></div>`);
 	$('#readme_md').hide().html('');
@@ -184,6 +175,7 @@ function get_file(path, file, callback) {
 		});
 	}
 }
+
 // Document display ?a=view
 function file(path) {
 	var name = path.split('/').pop();
@@ -191,30 +183,35 @@ function file(path) {
 	if ("|html|php|css|go|java|js|json|txt|sh|md|m|csv|c|cpp|".indexOf(`|${ext}|`) >= 0) {
 		return file_code(path);
 	}
-	if ("|mp4|".indexOf(`|${ext}|`) >= 0) {
+	if("|mp4|webm|avi|".indexOf(`|${ext}|`) >= 0){
 		return file_video(path);
+	}
+	if("|mp3|wav|ogg|m4a|opus".indexOf(`|${ext}|`) >= 0){
+		return file_audio(path);
 	}
 	if ("|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0) {
 		return file_image(path);
 	}
 }
+
 // Document display |html|php|css|go|java|js|json|txt|sh|md|
 function file_code(path) {
 	var type = {
-		"html": "html",
-		"php": "php",
-		"css": "css",
-		"go": "golang",
-		"java": "java",
-		"js": "javascript",
-		"json": "json",
-		"txt": "Text",
-		"sh": "sh",
+		"html":"html",
+		"php":"php",
+		"css":"css",
+		"go":"golang",
+		"java":"java",
+		"js":"javascript",
+		"json":"json",
+		"txt":"Text",
+		"sh":"sh",
+		"md":"Markdown",	
 		"md": "Markdown",
 		"m": "Matlab",
 		"csv": "csv",
 		"c": "c",
-		"cpp": "c++",
+		"cpp": "c++",		
 	};
 	var name = path.split('/').pop();
 	var ext = name.split('.').pop();
@@ -252,7 +249,8 @@ function file_code(path) {
 		});
 	});
 }
-// Document display mp4
+
+// Document display mp4|webm|avi|
 function file_video(path) {
 	var url = window.location.origin + path;
 	var content = `
@@ -276,7 +274,33 @@ function file_video(path) {
 	`;
 	$('#content').html(content);
 }
-//
+
+// Document display mp3|m4a|wav|ogg|
+function file_audio(path){
+	var url = window.location.origin + path;
+	var content = `
+<div class="mdui-container-fluid">
+	<br>
+	<audio class="mdui-center" preload controls>
+	  <source src="${url}"">
+	</audio>
+	<br>
+	<!-- Fixed label -->
+	<div class="mdui-textfield">
+	  <label class="mdui-textfield-label">下載網址</label>
+	  <input class="mdui-textfield-input" type="text" value="${url}"/>
+	</div>
+	<div class="mdui-textfield">
+	  <label class="mdui-textfield-label">HTML 引用</label>
+	  <textarea class="mdui-textfield-input"><audio><source src="${url}"></audio></textarea>
+	</div>
+</div>
+<a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
+	`;
+	$('#content').html(content);
+}
+
+// display images
 function file_image(path) {
 	var url = window.location.origin + path;
 	var content = `
@@ -302,9 +326,10 @@ function file_image(path) {
 	`;
 	$('#content').html(content);
 }
+
 //Time conversion
 function utc2beijing(utc_datetime) {
-	// 转为正常的时间格式 年-月-日 时:分:秒
+	// 轉為正常的時間格式 年-月-日 時:分:秒
 	var T_pos = utc_datetime.indexOf('T');
 	var Z_pos = utc_datetime.indexOf('Z');
 	var year_month_day = utc_datetime.substr(0, T_pos);
@@ -324,8 +349,12 @@ function utc2beijing(utc_datetime) {
 	var hour = "0" + unixtimestamp.getHours();
 	var minute = "0" + unixtimestamp.getMinutes();
 	var second = "0" + unixtimestamp.getSeconds();
-	return year + "-" + month.substring(month.length - 2, month.length) + "-" + date.substring(date.length - 2, date.length) + " " + hour.substring(hour.length - 2, hour.length) + ":" + minute.substring(minute.length - 2, minute.length) + ":" + second.substring(second.length - 2, second.length);
+	return year + "-" + month.substring(month.length - 2, month.length) + "-" + date.substring(date.length - 2, date.length)
+		+ " " + hour.substring(hour.length - 2, hour.length) + ":" 
+		+ minute.substring(minute.length - 2, minute.length) + ":" 
+		+ second.substring(second.length - 2, second.length);
 }
+
 // Bytes adaptive conversion to KB,MB,GB
 function formatFileSize(bytes) {
 	if (bytes >= 1000000000) {
@@ -343,12 +372,14 @@ function formatFileSize(bytes) {
 	}
 	return bytes;
 }
+
 String.prototype.trim = function (char) {
 	if (char) {
 		return this.replace(new RegExp('^\\' + char + '+|\\' + char + '+$', 'g'), '');
 	}
 	return this.replace(/^\s+|\s+$/g, '');
 };
+
 // README.md HEAD.md stand by
 function markdown(el, data) {
 	if (window.md == undefined) {
@@ -362,11 +393,13 @@ function markdown(el, data) {
 	}
 }
 document.write('<script src="//cdn.jsdelivr.net/gh/a224515a/MyGoIndex/themes/dark/cari.js"></script>');
+
 // Listening back event
 window.onpopstate = function () {
 	var path = window.location.pathname;
 	render(path);
 }
+
 $(function () {
 	init();
 	var path = window.location.pathname;

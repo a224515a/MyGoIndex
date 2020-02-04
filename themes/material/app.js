@@ -1,11 +1,11 @@
-// 在head 中 載入 必要靜態
+//
+// Head
 document.write('<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">');
 document.write('<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/a224515a/MyGoIndex/themes/material/custom.css">');
-
-// markdown支持
+// Markdown
 document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>');
 document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>i{opacity:.5}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-container{max-width:980px}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>');
-// 初始化頁面，並載入必要資源
+// Initialization page，And load the necessary resources
 function init(){
     document.siteName = $('title').html();
     $('body').addClass("mdui-theme-primary-blue-grey mdui-theme-accent-blue");
@@ -33,7 +33,6 @@ function render(path){
 	    file(path);
     }
 }
-
 
 // Render title
 function title(path){
@@ -120,7 +119,6 @@ function list_files(path,files){
         if(item['size']==undefined){
             item['size'] = "";
         }
-
         item['modifiedTime'] = utc2beijing(item['modifiedTime']);
         item['size'] = formatFileSize(item['size']);
         if(item['mimeType'] == 'application/vnd.google-apps.folder'){
@@ -165,7 +163,6 @@ function list_files(path,files){
     $('#list').html(html);
 }
 
-
 function get_file(path, file, callback){
 	var key = "file_path_"+path+file['modifiedTime'];
 	var data = localStorage.getItem(key);
@@ -179,30 +176,25 @@ function get_file(path, file, callback){
 	}
 }
 
-
-
-// 文件展示 ?a=view
+// Document display ?a=view
 function file(path){
 	var name = path.split('/').pop();
 	var ext = name.split('.').pop().toLowerCase().replace(`?a=view`,"");
 	if("|html|php|css|go|java|js|json|txt|sh|md|m|csv|c|cpp|".indexOf(`|${ext}|`) >= 0){
 		return file_code(path);
 	}
-
 	if("|mp4|webm|avi|".indexOf(`|${ext}|`) >= 0){
 		return file_video(path);
-	}
-	
-	if("|mp3|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
+	}	
+	if("|mp3|wav|ogg|m4a|opus".indexOf(`|${ext}|`) >= 0){
 		return file_audio(path);
 	}
-
 	if("|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0){
 		return file_image(path);
 	}
 }
 
-// 文件展示 |html|php|css|go|java|js|json|txt|sh|md|
+// Document display |html|php|css|go|java|js|json|txt|sh|md|
 function file_code(path){
 	var type = {
 		"html":"html",
@@ -237,8 +229,7 @@ function file_code(path){
 <script src="https://cdn.staticfile.org/ace/1.4.7/ace.js"></script>
 <script src="https://cdn.staticfile.org/ace/1.4.7/ext-language_tools.js"></script>
 	`;
-	$('#content').html(content);
-	
+	$('#content').html(content);	
 	$.get(path, function(data){
 		$('#editor').html($('<div/>').text(data).html());
 		var code_type = "Text";
@@ -248,8 +239,7 @@ function file_code(path){
 		var editor = ace.edit("editor");
 	    editor.setTheme("ace/theme/ambiance");
 	    editor.setFontSize(18);
-	    editor.session.setMode("ace/mode/"+code_type);
-	    
+	    editor.session.setMode("ace/mode/"+code_type);	    
 	    //Autocompletion
 	    editor.setOptions({
 	        enableBasicAutocompletion: true,
@@ -260,7 +250,7 @@ function file_code(path){
 	});
 }
 
-// 文件展示 影片 |mp4|webm|avi|
+// Document display mp4|webm|avi|
 function file_video(path){
 	var url = window.location.origin + path;
 	var content = `
@@ -270,7 +260,7 @@ function file_video(path){
 	  <source src="${url}" type="video/mp4">
 	</video>
 	<br>
-	<!-- 固定標籤 -->
+	<!-- Fixed label -->
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">下載網址</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
@@ -285,7 +275,7 @@ function file_video(path){
 	$('#content').html(content);
 }
 
-// 文件展示 音訊 |mp3|m4a|wav|ogg|
+// Document display mp3|m4a|wav|ogg|
 function file_audio(path){
 	var url = window.location.origin + path;
 	var content = `
@@ -295,7 +285,7 @@ function file_audio(path){
 	  <source src="${url}"">
 	</audio>
 	<br>
-	<!-- 固定標籤 -->
+	<!-- Fixed label -->
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">下載網址</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
@@ -310,8 +300,7 @@ function file_audio(path){
 	$('#content').html(content);
 }
 
-
-// 圖片展示
+// display images
 function file_image(path){
 	var url = window.location.origin + path;
 	var content = `
@@ -338,8 +327,7 @@ function file_image(path){
 	$('#content').html(content);
 }
 
-
-//時間轉換
+//Time conversion
 function utc2beijing(utc_datetime) {
     // 轉為正常的時間格式 年-月-日 時:分:秒
     var T_pos = utc_datetime.indexOf('T');
@@ -347,16 +335,13 @@ function utc2beijing(utc_datetime) {
     var year_month_day = utc_datetime.substr(0,T_pos);
     var hour_minute_second = utc_datetime.substr(T_pos+1,Z_pos-T_pos-1);
     var new_datetime = year_month_day+" "+hour_minute_second; // 2017-03-31 08:02:06
-
-    // 處理成為時間戳
+	// Processing becomes a timestamp
     timestamp = new Date(Date.parse(new_datetime));
     timestamp = timestamp.getTime();
     timestamp = timestamp/1000;
-
-    // 增加8個小時，北京時間比utc時間多八個時區
+	// Increase 8 hours，Beijing time has eight time zones than utc time    
     var unixtimestamp = timestamp+8*60*60;
-
-    // 時間戳轉為時間
+	// Timestamp is converted to time    
     var unixtimestamp = new Date(unixtimestamp*1000);
     var year = 1900 + unixtimestamp.getYear();
     var month = "0" + (unixtimestamp.getMonth() + 1);
@@ -370,15 +355,22 @@ function utc2beijing(utc_datetime) {
         + second.substring(second.length-2, second.length);
 }
 
-// bytes自適應轉換到KB,MB,GB
+// Bytes adaptive conversion to KB,MB,GB
 function formatFileSize(bytes) {
-    if (bytes>=1000000000) {bytes=(bytes/1000000000).toFixed(2)+' GB';}
-    else if (bytes>=1000000)    {bytes=(bytes/1000000).toFixed(2)+' MB';}
-    else if (bytes>=1000)       {bytes=(bytes/1000).toFixed(2)+' KB';}
-    else if (bytes>1)           {bytes=bytes+' bytes';}
-    else if (bytes==1)          {bytes=bytes+' byte';}
-    else                        {bytes='';}
-    return bytes;
+	if (bytes >= 1000000000) {
+		bytes = (bytes / 1000000000).toFixed(2) + ' GB';
+	} else if (bytes >= 1000000) {
+		bytes = (bytes / 1000000).toFixed(2) + ' MB';
+	} else if (bytes >= 1000) {
+		bytes = (bytes / 1000).toFixed(2) + ' KB';
+	} else if (bytes > 1) {
+		bytes = bytes + ' bytes';
+	} else if (bytes == 1) {
+		bytes = bytes + ' byte';
+	} else {
+		bytes = '';
+	}
+	return bytes;
 }
 
 String.prototype.trim = function (char) {
@@ -388,8 +380,7 @@ String.prototype.trim = function (char) {
     return this.replace(/^\s+|\s+$/g, '');
 };
 
-
-// README.md HEAD.md 支持
+// README.md HEAD.md stand by
 function markdown(el, data){
     if(window.md == undefined){
         //$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js',function(){
@@ -403,12 +394,11 @@ function markdown(el, data){
 }
 document.write('<script src="//cdn.jsdelivr.net/gh/a224515a/MyGoIndex/themes/material/cari.js"></script>');
 
-// 監聽回退事件
+// Listening back event
 window.onpopstate = function(){
     var path = window.location.pathname;
     render(path);
 }
-
 
 $(function(){
     init();
@@ -419,13 +409,12 @@ $(function(){
         render(url);
         return false;
     });
-
     $("body").on("click",'.view',function(){
         var url = $(this).attr('href');
         history.pushState(null, null, url);
         render(url);
         return false;
-    });
-    
+    });    
     render(path);
 });
+//
