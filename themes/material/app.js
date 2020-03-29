@@ -3,9 +3,6 @@ document.write('<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mdui@0.4.3/d
 // markdown support
 document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>');
 document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>i{opacity:.5}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-container{max-width:980px}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>');
-document.write('<link rel="stylesheet" href="//lib.baomitu.com/dplayer/1.25.0/DPlayer.min.css">');
-document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/dplayer/1.25.0/DPlayer.min.js"></script>');
-document.write('<script src="//lib.baomitu.com/hls.js/8.0.0-beta.3/hls.min.js"></script>');
 if(dark){document.write('<style>* {box-sizing: border-box}body{color:rgba(255,255,255,.87);background-color:#424242}.mdui-theme-primary-'+main_color+' .mdui-color-theme{background-color:#232427!important}</style>');}
 // Initialize the page and load the necessary resources
 function init(){
@@ -54,14 +51,14 @@ function title(path){
 function nav(path) {
 	var html = "";
 	html += `<a href="/" class="mdui-typo-headline folder">${document.siteName}</a>`;
-	var arr = path.trim("/").split("/");
-	var p = "/";
+	var arr = path.trim('/').split('/');
+	var p = '/';
 	if (arr.length > 0) {
 		for (i in arr) {
 			var n = arr[i];
 			n = decodeURI(n);
-			p += n + "/";
-			if (n == "") {
+			p += n + '/';
+			if (n == '') {
 				break;
 			}
 			html += `<i class="mdui-icon material-icons mdui-icon-dark folder" style="margin:0;">chevron_right</i><a class="folder" href="${p}">${n}</a>`;
@@ -141,7 +138,7 @@ function list_files(path,files){
     for(i in files){
         var item = files[i];
         var p = path+item.name+'/';
-        if(item['size'] == undefined){
+        if(item['size']==undefined){
             item['size'] = "";
         }
 
@@ -203,9 +200,11 @@ function get_file(path, file, callback){
 	}
 }
 
+
+
 // file display ?a=view
 function file(path){
-	var name = path.split("/").pop();
+	var name = path.split('/').pop();
 	var ext = name.split('.').pop().toLowerCase().replace(`?a=view`,"");
 	if("|py|cpp|c|m|ass|html|php|css|go|java|js|json|txt|sh|md|".indexOf(`|${ext}|`) >= 0){
 		return file_code(path);
@@ -245,10 +244,10 @@ function file_code(path){
 		"m":"Matlab",
 		"cpp":"C++",
 		"c":"C",
-		"ass":"ass"
+		"ass":"ass",
 	};
-	var name = path.split("/").pop();
-	var ext = name.split(".").pop();
+	var name = path.split('/').pop();
+	var ext = name.split('.').pop();
 	var href = window.location.origin + path;
 	var content = `
 <div class="mdui-container">
@@ -288,13 +287,18 @@ function file_code(path){
 
 // file display video |mp4|webm|avi|
 function file_video(path){
-  var url = window.location.origin + path;
-  var content = `
-<div class="mdui-container-fluid mdui-m-b-5">
-    <br>
-	<div class="mdui-center" id="dplayer">
-	</div>
+	var url = window.location.origin + path;
+	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}"><i class="mdui-icon material-icons">&#xe038;</i>Play in potplayer</a>`;
+	if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+	    playBtn = `	<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end"><i class="mdui-icon material-icons">&#xe039;</i>Play in mxplayer</a>`;
+	}
+	var content = `
+<div class="mdui-container-fluid">
 	<br>
+	<video class="mdui-video-fluid mdui-center" preload controls>
+	  <source src="${url}" type="video/mp4">
+	</video>
+	<br>${playBtn}
 	<!-Fixed label->
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">Download link</label>
@@ -302,42 +306,12 @@ function file_video(path){
 	</div>
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">HTML reference</label>
-	  <textarea rows="4" class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
-	</div>
-	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label mdui-m-b-3">Play</label>
-      <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" onclick="videoPlay('${url}','mp4');">MP4</button>      
+	  <textarea class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
 	</div>
 </div>
 <a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 	`;
-  $("#content").html(content);
-	
-  const dp = new DPlayer({
-	container: document.getElementById('dplayer'),
-	lang:'zh-tw',
-	volume: 0,
-	screenshot: true,
-	autoplay: false,
-	video: {
-	    url: url,	    
-	    type: 'auto'
-	}      
-});	
-}
-
-function videoPlay(url, type) {
-  dp = new DPlayer({
-	container: document.getElementById('dplayer'),
-	lang:'zh-tw',
-	volume: 0,
-	screenshot: true,
-	autoplay: false,
-	video: {
-	    url: url,	    
-	    type: 'auto'
-	} 
-  });
+	$('#content').html(content);
 }
 
 // file display music |mp3|m4a|wav|ogg|
@@ -456,7 +430,7 @@ function markdown(el, data){
     }
 }
 if(search){
-    document.write('<script src="//cdn.jsdelivr.net/gh/a224515a/MyGoindex/themes/test/cari.js"></script>');
+    document.write('<script src="//cdn.jsdelivr.net/gh/a224515a/MyGoindex/themes/material/cari.js"></script>');
 }
 // Listen for fallback events
 window.onpopstate = function(){
