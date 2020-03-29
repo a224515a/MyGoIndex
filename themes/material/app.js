@@ -396,9 +396,9 @@ function utc2Taipei(utc_datetime) {
 
 // bytes conversion to KB, MB, GB
 function formatFileSize(bytes) {
-    if (bytes>=1000000000) {bytes=(bytes/1000000000).toFixed(2)+' GB';}
-    else if (bytes>=1000000)    {bytes=(bytes/1000000).toFixed(2)+' MB';}
-    else if (bytes>=1000)       {bytes=(bytes/1000).toFixed(2)+' KB';}
+    if (bytes>=1000000000) {bytes=(bytes/1024/1024/1024).toFixed(2)+' GB';}
+    else if (bytes>=1000000)    {bytes=(bytes/1024/1024).toFixed(2)+' MB';}
+    else if (bytes>=1000)       {bytes=(bytes/1024).toFixed(2)+' KB';}
     else if (bytes>1)           {bytes=bytes+' bytes';}
     else if (bytes==1)          {bytes=bytes+' byte';}
     else                        {bytes='';}
