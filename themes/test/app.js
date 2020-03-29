@@ -297,7 +297,7 @@ function file_video(path){
 	<div class="mdui-center" id="dplayer">
 	</div>
 	<br>
-	<!-- 固定标签 -->
+	<!-Fixed label->
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">Download link</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
@@ -458,7 +458,7 @@ function markdown(el, data){
     }
 }
 if(search){
-    document.write('<script src="//cdn.jsdelivr.net/gh/a224515a/MyGoindex/themes/material/cari.js"></script>');
+    document.write('<script src="//cdn.jsdelivr.net/gh/a224515a/MyGoindex/themes/test/cari.js"></script>');
 }
 // Listen for fallback events
 window.onpopstate = function(){
