@@ -168,7 +168,7 @@ function list_files(path,files){
                 });
             }
             var ext = p.split('.').pop();
-            if("|tif|tiff|opus|py|cpp|c|m|ass|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
+            if("|tif|tiff|py|cpp|c|m|ass|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|opus|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
 	            p += "?a=view";
 	            c += " view";
             }
@@ -218,7 +218,7 @@ function file(path){
 		return file_video(path);
 	}
 	
-	if("|opus|mp3|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
+	if("|opus|mp3|flac|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
 		return file_audio(path);
 	}
 
