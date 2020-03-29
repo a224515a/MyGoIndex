@@ -206,7 +206,7 @@ function get_file(path, file, callback){
 function file(path){
 	var name = path.split('/').pop();
 	var ext = name.split('.').pop().toLowerCase().replace(`?a=view`,"");
-	if("|html|php|css|go|java|js|json|txt|sh|md|".indexOf(`|${ext}|`) >= 0){
+	if("|py|cpp|c|m|ass|html|php|css|go|java|js|json|txt|sh|md|".indexOf(`|${ext}|`) >= 0){
 		return file_code(path);
 	}
 
@@ -218,11 +218,11 @@ function file(path){
 		return file_video(path);
 	}
 	
-	if("|mp3|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
+	if("|opus|mp3|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
 		return file_audio(path);
 	}
 
-	if("|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0){
+	if("|tif|tiff|bmp|jpg|jpeg|png|gif|".indexOf(`|${ext}|`) >= 0){
 		return file_image(path);
 	}
 }
@@ -240,6 +240,11 @@ function file_code(path){
 		"txt":"Text",
 		"sh":"sh",
 		"md":"Markdown",	
+		"py":"Python",
+		"m":"Matlab",
+		"cpp":"C++",
+		"c":"C",
+		"ass":"ass",
 	};
 	var name = path.split('/').pop();
 	var ext = name.split('.').pop();
