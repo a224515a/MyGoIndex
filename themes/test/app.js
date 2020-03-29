@@ -290,31 +290,30 @@ function file_code(path){
 
 // file display video |mp4|webm|avi|
 function file_video(path){
-	var url = window.location.origin + path;
-	var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}"><i class="mdui-icon material-icons">&#xe038;</i>Play in potplayer</a>`;
-	if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
-	    playBtn = `	<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end"><i class="mdui-icon material-icons">&#xe039;</i>Play in mxplayer</a>`;
-	}
-	var content = `
-<div class="mdui-container-fluid">
+  var url = window.location.origin + path;
+  var content = `
+<div class="mdui-container-fluid mdui-m-b-5">
+    <br>
+	<div class="mdui-center" id="dplayer">
+	</div>
 	<br>
-	<video class="mdui-video-fluid mdui-center" id="dplayer" preload controls>
-	  <source src="${url}" type="video/mp4">
-	</video>
-	<br>${playBtn}
-	<!-Fixed label->
+	<!-- 固定标签 -->
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">download link</label>
+	  <label class="mdui-textfield-label">Download link</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">HTML reference</label>
-	  <textarea class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
+	  <textarea rows="4" class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
+	</div>
+	<div class="mdui-textfield">
+	  <label class="mdui-textfield-label mdui-m-b-3">Play</label>
+      <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" onclick="videoPlay('${url}','mp4');">MP4</button>      
 	</div>
 </div>
 <a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 	`;
-	$('#content').html(content);
+  $("#content").html(content);
 	
   const dp = new DPlayer({
 	container: document.getElementById('dplayer'),
