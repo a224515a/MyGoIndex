@@ -5,7 +5,6 @@ document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/mark
 document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>i{opacity:.5}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-container{max-width:980px}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>');
 document.write('<link rel="stylesheet" href="//lib.baomitu.com/dplayer/1.25.0/DPlayer.min.css">');
 document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/dplayer/1.25.0/DPlayer.min.js"></script>');
-document.write('<script src="//lib.baomitu.com/hls.js/8.0.0-beta.3/hls.min.js"></script>');
 if(dark){document.write('<style>* {box-sizing: border-box}body{color:rgba(255,255,255,.87);background-color:#424242}.mdui-theme-primary-'+main_color+' .mdui-color-theme{background-color:#232427!important}</style>');}
 // Initialize the page and load the necessary resources
 function init(){
@@ -42,7 +41,6 @@ function render(path){
 	    file(path);
     }
 }
-
 
 // Title
 function title(path){
@@ -171,7 +169,7 @@ function list_files(path,files){
                 });
             }
             var ext = p.split('.').pop();
-            if("|tif|tiff|opus|py|cpp|c|m|ass|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
+            if("|tif|tiff|opus|py|cpp|c|m|ass|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
 	            p += "?a=view";
 	            c += " view";
             }
@@ -219,7 +217,7 @@ function file(path){
 		return file_video(path);
 	}
 	
-	if("|opus|mp3|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
+	if("|opus|mp3|flac|wav|ogg|m4a|".indexOf(`|${ext}|`) >= 0){
 		return file_audio(path);
 	}
 
@@ -231,21 +229,21 @@ function file(path){
 // file display |html|php|css|go|java|js|json|txt|sh|md|
 function file_code(path){
 	var type = {
-		html:"html",
-		php:"php",
-		css:"css",
-		go:"golang",
-		java:"java",
-		js:"javascript",
-		json:"json",
-		txt:"Text",
-		sh:"sh",
-		md:"Markdown",	
-		py:"Python",
-		m:"Matlab",
-		cpp:"C++",
-		c:"C",
-		ass:"ass"
+		"html":"html",
+		"php":"php",
+		"css":"css",
+		"go":"golang",
+		"java":"java",
+		"js":"javascript",
+		"json":"json",
+		"txt":"Text",
+		"sh":"sh",
+		"md":"Markdown",	
+		"py":"Python",
+		"m":"Matlab",
+		"cpp":"C++",
+		"c":"C",
+		"ass":"ass"
 	};
 	var name = path.split("/").pop();
 	var ext = name.split(".").pop();
@@ -302,11 +300,7 @@ function file_video(path){
 	</div>
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">HTML reference</label>
-	  <textarea rows="4" class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
-	</div>
-	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label mdui-m-b-3">Play</label>
-      <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" onclick="videoPlay('${url}','mp4');">MP4</button>      
+	  <textarea class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
 	</div>
 </div>
 <a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
@@ -324,20 +318,6 @@ function file_video(path){
 	    type: 'auto'
 	}      
 });	
-}
-
-function videoPlay(url, type) {
-  dp = new DPlayer({
-	container: document.getElementById('dplayer'),
-	lang:'zh-tw',
-	volume: 0,
-	screenshot: true,
-	autoplay: false,
-	video: {
-	    url: url,	    
-	    type: 'auto'
-	} 
-  });
 }
 
 // file display music |mp3|m4a|wav|ogg|
