@@ -244,7 +244,7 @@ function file_code(path){
 		"m":"Matlab",
 		"cpp":"C++",
 		"c":"C",
-		"ass":"ass",
+		"ass":"ass"
 	};
 	var name = path.split('/').pop();
 	var ext = name.split('.').pop();
