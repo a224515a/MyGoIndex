@@ -111,6 +111,7 @@ class googleDrive {
     let url = `https://www.googleapis.com/drive/v3/files/${id}?alt=media`;
     let requestOption = await this.requestOption();
     requestOption.headers['Range'] = range;
+    requestOption.headers['Access-Control-Allow-Origin'] = '*';
     return await fetch(url, requestOption);
   }
 
