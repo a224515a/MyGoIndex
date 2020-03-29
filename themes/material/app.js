@@ -301,7 +301,7 @@ function file_video(path){
 	<br>${playBtn}
 	<!-Fixed label->
 	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">download link</label>
+	  <label class="mdui-textfield-label">Download link</label>
 	  <input class="mdui-textfield-input" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
