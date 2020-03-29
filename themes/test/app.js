@@ -231,21 +231,21 @@ function file(path){
 // file display |html|php|css|go|java|js|json|txt|sh|md|
 function file_code(path){
 	var type = {
-		"html":"html",
-		"php":"php",
-		"css":"css",
-		"go":"golang",
-		"java":"java",
-		"js":"javascript",
-		"json":"json",
-		"txt":"Text",
-		"sh":"sh",
-		"md":"Markdown",	
-		"py":"Python",
-		"m":"Matlab",
-		"cpp":"C++",
-		"c":"C",
-		"ass":"ass"
+		html:"html",
+		php:"php",
+		css:"css",
+		go:"golang",
+		java:"java",
+		js:"javascript",
+		json:"json",
+		txt:"Text",
+		sh:"sh",
+		md:"Markdown",	
+		py:"Python",
+		m:"Matlab",
+		cpp:"C++",
+		c:"C",
+		ass:"ass"
 	};
 	var name = path.split("/").pop();
 	var ext = name.split(".").pop();
