@@ -298,7 +298,7 @@ function file_video(path){
 	var content = `
 <div class="mdui-container-fluid">
 	<br>
-	<video class="mdui-video-fluid mdui-center" preload controls>
+	<video class="mdui-video-fluid mdui-center" id="dplayer" preload controls>
 	  <source src="${url}" type="video/mp4">
 	</video>
 	<br>${playBtn}
