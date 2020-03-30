@@ -109,8 +109,7 @@ function list(path){
 	 <div class="mdui-row"> 
 	  <ul id="list" class="mdui-list"> 
 	  </ul>
-	  if(dark){content += `<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-white-500"> Total <span class="number"></span> items </div>`;
-        }else{content += `<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-"+main_color+"-500"> Total <span class="number"></span> items </div>`;}	  
+	<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-grey-500"> Total <span class="number"></span> items </div>	  	        
 	 </div>
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
