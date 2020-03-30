@@ -88,8 +88,8 @@ function list(path){
         if(dark){content += `<div class="mdui-textfield"><input class="mdui-textfield-input mdui-text-color-white-text" id="myInput" onkeyup="myFunction()" type="text" placeholder="Search for names.."></input></div>`;
         }else{content += `<div class="mdui-textfield"><input class="mdui-textfield-input" id="myInput" onkeyup="myFunction()" type="text" placeholder="Search for names.."></input></div>`;}
     }
-	if(dark){content += `<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-white"> Total <span class="number"></span> items </div>`;
-	}else{content += `<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-"+main_color+"-500"> Total <span class="number"></span> items </div>`;}
+    if(dark){content += `<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-white-500"> Total <span class="number"></span> items </div>`;
+    }else{content += `<div id="count" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-grey-500"> Total <span class="number"></span> items </div>`;}
 					
 	content += `<div class="mdui-row"> 
 	  <ul class="mdui-list"> 
