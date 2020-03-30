@@ -112,7 +112,7 @@ function list(path){
 	 <div class="mdui-row"> 
 	  <ul id="list" class="mdui-list"> 
 	  </ul>
-	  <div id="count2" class="mdui-hidden mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500"> 共 <span class="number"></span> 项 </div>	  
+	  <div id="count2" class="mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500"> 共 <span class="number"></span> 项 </div>	  
 	 </div>
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
