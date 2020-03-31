@@ -112,7 +112,7 @@ function list(path){
 	 <div class="mdui-row"> 
 	  <ul id="list" class="mdui-list"> 
 	  </ul>
-	  <div id="count" class="mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500"> Total <span class="number"></span> items </div>	  
+	  <div id="count2" class="mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-"+main_color> Total <span class="number"></span> items </div>	  
 	 </div>
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
@@ -190,6 +190,7 @@ function list_files(path,files){
     }
     $('#list').html(html);
     $('#count').removeClass('mdui-hidden').find('.number').text($list.find('li.mdui-list-item').length);
+    $('#count2').find('.number').text($list.find('li.mdui-list-item').length);	
 
 }
 
@@ -299,10 +300,10 @@ function file_video(path){
   }
   var content = `
 <div class="mdui-container-fluid mdui-m-b-5">
-    <br>
+    	<br>
 	<div class="mdui-center mdui-video-fluid" id="dplayer"> 	
 	</div>
-	<br>
+	<br>${playBtn}
 	<!-Fixed label->
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">Download link</label>
