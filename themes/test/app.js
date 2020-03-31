@@ -99,7 +99,7 @@ function list(path){
 	<i class="mdui-icon material-icons icon-sort" data-sort="name" data-order="more">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-3 mdui-text-right">
-        Change the time
+            Modification time
 	<i class="mdui-icon material-icons icon-sort" data-sort="date" data-order="downward">expand_more</i>
 	    </div> 
 	    <div class="mdui-col-sm-2 mdui-text-right">
@@ -112,7 +112,7 @@ function list(path){
 	 <div class="mdui-row"> 
 	  <ul id="list" class="mdui-list"> 
 	  </ul>
-	  <div id="count2" class="mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500"> 共 <span class="number"></span> 项 </div>	  
+	  <div id="count" class="mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-blue-grey-500"> Total <span class="number"></span> items </div>	  
 	 </div>
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
@@ -172,7 +172,7 @@ function list_files(path,files){
                     markdown("#head_md",data);
                 });
             }
-            var ext = p.split('.').pop();
+            var ext = p.split('.').pop().toLowerCase();
             if("|tif|tiff|opus|py|cpp|c|m|ass|html|php|css|go|java|js|json|txt|sh|md|mp4|webm|avi|bmp|jpg|jpeg|png|gif|m4a|mp3|flac|wav|ogg|mpg|mpeg|mkv|rm|rmvb|mov|wmv|asf|ts|flv|".indexOf(`|${ext}|`) >= 0){
 	            p += "?a=view";
 	            c += " view";
@@ -189,7 +189,7 @@ function list_files(path,files){
         }
     }
     $('#list').html(html);
-	$('#count').removeClass('mdui-hidden').find('.number').text($list.find('li.mdui-list-item').length);
+    $('#count').removeClass('mdui-hidden').find('.number').text($list.find('li.mdui-list-item').length);
 
 }
 
@@ -252,7 +252,7 @@ function file_code(path){
 		"ass":"ass"
 	};
 	var name = path.split("/").pop();
-	var ext = name.split(".").pop();
+	var ext = name.split(".").pop().toLowerCase();
 	var href = window.location.origin + path;
 	var content = `
 <div class="mdui-container">
@@ -293,10 +293,14 @@ function file_code(path){
 // file display video |mp4|webm|avi|
 function file_video(path){
   var url = window.location.origin + path;
+  var playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="potplayer://${url}"><i class="mdui-icon material-icons">&#xe038;</i>Play in potplayer</a>`;
+  if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+      playBtn = `<a class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end"><i class="mdui-icon material-icons">&#xe039;</i>Play in mxplayer</a>`;
+  }
   var content = `
 <div class="mdui-container-fluid mdui-m-b-5">
     <br>
-	<div class="mdui-center" id="dplayer">
+	<div class="mdui-center mdui-video-fluid" id="dplayer"> 	
 	</div>
 	<br>
 	<!-Fixed label->
