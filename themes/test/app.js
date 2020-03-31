@@ -381,13 +381,13 @@ function file_video(path)
 	</div>
 	<br>${playBtn}
 	<!-Fixed label->
-	<div class="mdui-textfield mdui-text-color-white-text">
+	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">Download link</label>
-	  <input class="mdui-textfield-input mdui-text-color-white-text" type="text" value="${url}"/>
+	  <input class="mdui-textfield-input mdui-text-color-white" type="text" value="${url}"/>
 	</div>
-	<div class="mdui-textfield mdui-text-color-white-text">
+	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">HTML reference</label>
-	  <textarea class="mdui-textfield-input mdui-text-color-white-text"><video><source src="${url}" type="video/mp4"></video></textarea>
+	  <textarea class="mdui-textfield-input mdui-text-color-white"><video><source src="${url}" type="video/mp4"></video></textarea>
 	</div>
 </div>`;
     }
@@ -436,11 +436,31 @@ function file_audio(path)
 {
     var url = window.location.origin + path;
     var content = "";
-    if ()
-    {}
+    if (dark)
+    {
+        content += `
+<div class="mdui-container-fluid">
+	<br>
+	<audio class="mdui-center" preload controls>
+	  <source src="${url}"">
+	</audio>
+	<br>
+	<!-Fixed label->
+	<div class="mdui-textfield">
+	  <label class="mdui-textfield-label">Download link</label>
+	  <input class="mdui-textfield-input mdui-text-color-white" type="text" value="${url}"/>
+	</div>
+	<div class="mdui-textfield">
+	  <label class="mdui-textfield-label">HTML reference</label>
+	  <textarea class="mdui-textfield-input mdui-text-color-white"><audio><source src="${url}"></audio></textarea>
+	</div>
+</div>
+<a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
+	`;
+    }
     else
-    {}
-    content += `
+    {
+        content += `
 <div class="mdui-container-fluid">
 	<br>
 	<audio class="mdui-center" preload controls>
@@ -459,6 +479,8 @@ function file_audio(path)
 </div>
 <a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 	`;
+    }
+
     $('#content').html(content);
 }
 
@@ -476,15 +498,15 @@ function file_image(path)
 	<br>
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">Download link</label>
-	  <input class="mdui-textfield-input mdui-text-color-white-text" type="text" value="${url}"/>
+	  <input class="mdui-textfield-input mdui-text-color-white" type="text" value="${url}"/>
 	</div>
 	<div class="mdui-textfield">
 	  <label class="mdui-textfield-label">HTML references</label>
-	  <input class="mdui-textfield-input mdui-text-color-white-text" type="text" value="<img src='${url}' />"/>
+	  <input class="mdui-textfield-input mdui-text-color-white" type="text" value="<img src='${url}' />"/>
 	</div>
         <div class="mdui-textfield">
 	  <label class="mdui-textfield-label">Markdown Reference</label>
-	  <input class="mdui-textfield-input mdui-text-color-white-text" type="text" value="![](${url})"/>
+	  <input class="mdui-textfield-input mdui-text-color-white" type="text" value="![](${url})"/>
 	</div>
         <br>
 </div>
