@@ -112,7 +112,6 @@ function list(path){
 	 <div class="mdui-row"> 
 	  <ul id="list" class="mdui-list"> 
 	  </ul>
-	  <div id="count2" class="mdui-center mdui-text-center mdui-m-b-3 mdui-typo-subheading mdui-text-color-"+main_color> Total <span class="number"></span> items </div>	  
 	 </div>
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
@@ -190,8 +189,8 @@ function list_files(path,files){
         }
     }
     $('#list').html(html);
+    let $list = $('#list');	
     $('#count').removeClass('mdui-hidden').find('.number').text($list.find('li.mdui-list-item').length);
-    $('#count2').find('.number').text($list.find('li.mdui-list-item').length);	
 
 }
 
