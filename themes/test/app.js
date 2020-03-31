@@ -140,6 +140,7 @@ function list(path){
 
 function list_files(path,files){
     html = "";
+    var $list = $('#list');
     for(i in files){
         var item = files[i];
         var p = path+item.name+'/';
