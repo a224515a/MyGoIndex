@@ -1,11 +1,11 @@
 // load in head necessary static
 document.write('<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/mdui@0.4.3/dist/css/mdui.min.css">');
-document.write('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/plyr/3.6.2/plyr.css">');
-document.write('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dplayer/1.25.0/DPlayer.min.css">');
-document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/dplayer/1.25.0/DPlayer.min.js"></script>');
+// document.write('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/plyr/3.6.2/plyr.css">');
+document.write('<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/dplayer/1.25.1/DPlayer.min.css">');
+document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/dplayer/1.25.1/DPlayer.min.js"></script>');
 
 // markdown support
-document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js"></script>');
+document.write('<script src="//cdn.jsdelivr.net/npm/markdown-it@11.0.0/dist/markdown-it.min.js"></script>');
 document.write('<style>.mdui-appbar .mdui-toolbar{height:56px;font-size:1pc}.mdui-toolbar>*{padding:0 6px;margin:0 2px}.mdui-toolbar>i{opacity:.5}.mdui-toolbar>.mdui-typo-headline{padding:0 1pc 0 0}.mdui-toolbar>i{padding:0}.mdui-toolbar>a:hover,a.active,a.mdui-typo-headline{opacity:1}.mdui-container{max-width:980px}.mdui-list-item{transition:none}.mdui-list>.th{background-color:initial}.mdui-list-item>a{width:100%;line-height:3pc}.mdui-list-item{margin:2px 0;padding:0}.mdui-toolbar>a:last-child{opacity:1}@media screen and (max-width:980px){.mdui-list-item .mdui-text-right{display:none}.mdui-container{width:100%!important;margin:0}.mdui-toolbar>.mdui-typo-headline,.mdui-toolbar>a:last-child,.mdui-toolbar>i:first-child{display:block}}</style>');
 if (dark) { document.write('<style>* {box-sizing: border-box}body{color:rgba(255,255,255,.87);background-color:#333232}.mdui-theme-primary-' + main_color + ' .mdui-color-theme{background-color:#232427!important}</style>'); }
 
@@ -385,7 +385,7 @@ function file_image(path) {
 	`;
 	$('#content').html(content);
 }
-document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/plyr/3.6.2/plyr.min.js"></script>');
+// document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/plyr/3.6.2/plyr.min.js"></script>');
 document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>');
 
 
@@ -459,7 +459,7 @@ String.prototype.trim = function (char) {
 // README.md HEAD.md support
 function markdown(el, data) {
 	if (window.md == undefined) {
-		//$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@10.0.0/dist/markdown-it.min.js',function(){
+		//$.getScript('https://cdn.jsdelivr.net/npm/markdown-it@11.0.0/dist/markdown-it.min.js',function(){
 		window.md = window.markdownit();
 		markdown(el, data);
 		//});
