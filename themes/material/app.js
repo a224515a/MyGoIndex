@@ -90,7 +90,7 @@ function list(path) {
 	<div id="head_md" class="mdui-typo" style="display:none;padding: 20px 0;"></div>`;
 	if (search) {
 		if (dark) {
-			content += `<div class="mdui-textfield"><input class="mdui-textfield-input mdui-text-color-white-text" id="searchInput" onkeyup="searchOnlyActiveDir()" type="text" placeholder="Type to search.."></input></div>`
+			content += `<div class="mdui-textfield"><input class="mdui-textfield-input mdui-text-color-white-text" id="searchInput" onkeyup="searchOnlyActiveDir()" type="text" placeholder="Type to search.."></input></div>`;
 		} else { content += `<div class="mdui-textfield"><input class="mdui-textfield-input" id="searchInput" onkeyup="searchOnlyActiveDir()" type="text" placeholder="Type to search.."></input></div>`; }
 	}
 	content += `<div class="mdui-row"> 
@@ -118,8 +118,6 @@ function list(path) {
 	 <div id="readme_md" class="mdui-typo" style="display:none; padding: 20px 0;"></div>
 	`;
 	$('#content').html(content);
-
-	var password = localStorage.getItem('password' + path);
 	$('#list').html(`<div class="mdui-progress"><div class="mdui-progress-indeterminate"></div></div>`);
 	$('#readme_md').hide().html('');
 	$('#head_md').hide().html('');
@@ -286,10 +284,10 @@ function file_code(path) {
 function file_video(path) {
 	var url = window.location.origin + path;
 	var playBtn = `
-	<button class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-accent" mdui-menu="{target:'#external-player'}">
-	  <i class="mdui-icon material-icons">&#xe039;</i> Play in External Player
-	</button>
-	<ul class="mdui-menu" id="external-player">`;
+      <button class="mdui-btn mdui-ripple mdui-color-theme-accent" mdui-menu="{target:'#external-player'}">
+        <i class="mdui-icon material-icons">&#xe039;</i> Play in External Player
+	  </button>
+	  <ul class="mdui-menu" id="external-player">`;
 	if (/(iPhone|iPad|iPod|iOS|Android)/i.test(navigator.userAgent)) {
 		playBtn += `
 		<li class="mdui-menu-item"><a href="intent:${url}#Intent;package=com.mxtech.videoplayer.ad;S.title=${path};end" class="mdui-ripple">MX Player</a></li>
@@ -301,28 +299,7 @@ function file_video(path) {
 		<li class="mdui-menu-item"><a href="vlc://${url}" class="mdui-ripple">VLC</a></li>`;
 	}
 	playBtn += `</ul>`;
-	var content = "";
-
-	if (dark) {
-		content += `
-<div class="mdui-container-fluid mdui-m-b-5">
-    	<br>
-	<div class="mdui-center mdui-video-fluid" id="dplayer"> 	
-	</div>
-	<br>${playBtn}
-	<!-Fixed label->
-	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">Download link</label>
-	  <input class="mdui-textfield-input mdui-text-color-white" type="text" value="${url}"/>
-	</div>
-	<div class="mdui-textfield">
-	  <label class="mdui-textfield-label">HTML reference</label>
-	  <textarea class="mdui-textfield-input mdui-text-color-white"><video><source src="${url}" type="video/mp4"></video></textarea>
-	</div>
-</div>`;
-	}
-	else {
-		content += `
+	var content = `
 <div class="mdui-container-fluid mdui-m-b-5">
     	<br>
 	<div class="mdui-center mdui-video-fluid" id="dplayer"> 	
@@ -337,13 +314,10 @@ function file_video(path) {
 	  <label class="mdui-textfield-label">HTML reference</label>
 	  <textarea class="mdui-textfield-input"><video><source src="${url}" type="video/mp4"></video></textarea>
 	</div>
-</div>`;
-	}
-	content += `
+</div>
 <a href="${url}" class="mdui-fab mdui-fab-fixed mdui-ripple mdui-color-theme-accent"><i class="mdui-icon material-icons">file_download</i></a>
 	`;
 	$('#content').html(content);
-
 	const dp = new DPlayer(
 		{
 			container: document.getElementById('dplayer'),
@@ -358,8 +332,8 @@ function file_video(path) {
 			}
 		}
 	);
+	window.player = dp;
 }
-
 // file display music |mp3|m4a|wav|ogg|
 function file_audio(path) {
 	var url = window.location.origin + path;
@@ -411,9 +385,9 @@ function file_image(path) {
 	`;
 	$('#content').html(content);
 }
-
 document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/plyr/3.6.2/plyr.min.js"></script>');
 document.write('<script src="//cdnjs.cloudflare.com/ajax/libs/mdui/0.4.3/js/mdui.min.js"></script>');
+
 
 function searchOnlyActiveDir() {
 	var e, t, n, l;

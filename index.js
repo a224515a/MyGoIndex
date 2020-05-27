@@ -96,10 +96,11 @@ async function handleRequest(request) {
   }
 }
 
+
 async function apiRequest(request) {
   let url = new URL(request.url);
   let path = url.pathname;
-  // console.log(path);
+  console.log(path);
   let option = { status: 200, headers: { 'Access-Control-Allow-Origin': '*' } }
 
   if (path.substr(-1) == '/') {
@@ -109,6 +110,17 @@ async function apiRequest(request) {
     let file = await gd.file(path);
     let range = request.headers.get('Range');
     return new Response(JSON.stringify(file));
+  }
+}
+
+async function apiSearchRequest(q) {
+  let option = { status: 200, headers: { 'Access-Control-Allow-Origin': '*' } }
+  let notfound = []
+  let list = await gd.search(q);
+  if (list.length == 0) {
+    return new Response(JSON.stringify(notfound), option);
+  } else {
+    return new Response(JSON.stringify(list), option);
   }
 }
 
@@ -138,11 +150,11 @@ class googleDrive {
   async _file(path) {
     let arr = path.split('/');
     let name = arr.pop();
-    name = decodeURIComponent(name).replace(/\'/g, "\\'");
+    name = decodeURIComponent(name).replace(/\'/g, "\'");
     let dir = arr.join('/') + '/';
-    // console.log(name, dir);
+    console.log(name, dir);
     let parent = await this.findPathId(dir);
-    // console.log(parent);
+    console.log(parent);
     let url = 'https://www.googleapis.com/drive/v3/files';
     let params = { 'includeItemsFromAllDrives': true, 'supportsAllDrives': true };
     params.q = `'${parent}' in parents and name = '${name}' andtrashed = false`;
@@ -151,7 +163,7 @@ class googleDrive {
     let requestOption = await this.requestOption();
     let response = await fetch(url, requestOption);
     let obj = await response.json();
-    // console.log(obj);
+    console.log(obj);
     return obj.files[0];
   }
 
@@ -255,7 +267,7 @@ class googleDrive {
   }
 
   async _findDirId(parent, name) {
-    name = decodeURIComponent(name).replace(/\'/g, "\\'");
+    name = decodeURIComponent(name).replace(/\'/g, "\'");
 
     console.log("_findDirId", parent, name);
 
